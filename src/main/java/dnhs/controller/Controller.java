@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 
 import dnhs.model.Model;
-import dnhs.model.Art;
+import dnhs.model.University;
 import dnhs.view.CheckoutPanel;
 import dnhs.view.FooterPanel;
 import dnhs.view.StorePanel;
@@ -83,8 +83,8 @@ public class Controller {
 			return null;
 		else {
 			int count = 0;
-			for (Art product : model.retrieveProducts()) {
-				buynowlistenerarray[count] = new BuyNowListener(product.name, product.type, product.price);
+			for (University product : model.retrieveProducts()) {
+				buynowlistenerarray[count] = new BuyNowListener(product.name, product.type, product.tuition);
 				++count;
 			}
 			return buynowlistenerarray;

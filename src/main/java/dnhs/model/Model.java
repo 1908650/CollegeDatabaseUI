@@ -18,40 +18,28 @@ public class Model {
 	public String searchedKeyWord = "";
 
 	public void cartAdd(String name, String type, String price) {
-		List<Art> arts = retrieveCart();
+		List<University> arts = retrieveCart();
 		if (arts == null)
-			arts = new ArrayList<Art>();
+			arts = new ArrayList<University>();
 
-		if (type.equals("Pencil")) {
-			arts.add(new Pencil(type, price, name));
-		} else if (type.equals("Ink")) {
-			arts.add(new Ink(type, price, name));
-		} else if (type.equals("Acrylic")) {
-			arts.add(new Acrylic(type, price, name));
-		} else if (type.equals("Digital")) {
-			arts.add(new Digital(type, price, name));
-		} else if (type.equals("OtherMediums")) {
-			arts.add(new OtherMediums(type, price, name));
+		if (type.equals("Private")) {
+			arts.add(new Private(type, price, name));
+		} else if (type.equals("Public")) {
+			arts.add(new Public(type, price, name));
 		}
 		writeCSV(arts, BAG_LOCATION, false);
 	}
 
-	public List<Art> retrieveCart() {
+	public List<University> retrieveCart() {
 		try {
 			CSVReader reader = new CSVReader(new FileReader(BAG_LOCATION));
-			List<Art> arts = new ArrayList<Art>();
+			List<University> arts = new ArrayList<University>();
 			List<String[]> lines = reader.readAll();
 			for (String[] item : lines) {
-				if (item[0].equals("Pencil")) {
-					arts.add(new Pencil(item[0], item[1], item[2]));
-				} else if (item[0].equals("Ink")) {
-					arts.add(new Ink(item[0], item[1], item[2]));
-				} else if (item[0].equals("Acrylic")) {
-					arts.add(new Acrylic(item[0], item[1], item[2]));
-				} else if (item[0].equals("Digital")) {
-					arts.add(new Digital(item[0], item[1], item[2]));
-				} else if (item[0].equals("OtherMediums")) {
-					arts.add(new OtherMediums(item[0], item[1], item[2]));
+				if (item[0].equals("Private")) {
+					arts.add(new Private(item[0], item[1], item[2]));
+				} else if (item[0].equals("Public")) {
+					arts.add(new Public(item[0], item[1], item[2]));
 				}
 			}
 			reader.close();
@@ -65,16 +53,16 @@ public class Model {
 		return null;
 	}
 
-	public List<Art> retrieveProducts() {
+	public List<University> retrieveProducts() {
 		try {
 			CSVReader reader = new CSVReader(new FileReader(PRODUCT_LOCATION));
-			List<Art> arts = new ArrayList<Art>();
+			List<University> arts = new ArrayList<University>();
 			List<String[]> lines = reader.readAll();
 			for (String[] item : lines) {
 				if (item[0].equals("Private") && (filter.equals("Private") || filter.equals("All"))) {
-					arts.add(new Pencil(item[0], item[1], item[2], item[3]));
+					arts.add(new Private(item[0], item[1], item[2], item[3]));
 				} else if (item[0].equals("Public") && (filter.equals("Public") || filter.equals("All"))) {
-					arts.add(new Ink(item[0], item[1], item[2], item[3]));
+					arts.add(new Public(item[0], item[1], item[2], item[3]));
 				}
 			}
 			reader.close();
@@ -86,16 +74,16 @@ public class Model {
 		return null;
 	}
 
-	public List<Art> retrieveSearch() {
+	public List<University> retrieveSearch() {
 		try {
 			CSVReader reader = new CSVReader(new FileReader(PRODUCT_LOCATION));
-			List<Art> arts = new ArrayList<Art>();
+			List<University> arts = new ArrayList<University>();
 			List<String[]> lines = reader.readAll();
 			for (String[] item : lines) {
 				if (item[0].equals("Private") && item[3].toLowerCase().contains(searchedKeyWord)) {
-					arts.add(new Pencil(item[0], item[1], item[2], item[3]));
+					arts.add(new Private(item[0], item[1], item[2], item[3]));
 				} else if (item[0].equals("Public") && item[3].toLowerCase().contains(searchedKeyWord)) {
-					arts.add(new Ink(item[0], item[1], item[2], item[3]));
+					arts.add(new Public(item[0], item[1], item[2], item[3]));
 				}
 			}
 			reader.close();
@@ -107,13 +95,13 @@ public class Model {
 		return null;
 	}
 
-	public void writeCSV(List<Art> arts, String csvlocation, boolean replace) {
+	public void writeCSV(List<University> arts, String csvlocation, boolean replace) {
 		try {
 			CSVWriter writer = new CSVWriter(new FileWriter(csvlocation, replace));
 
 			List<String[]> allLines = new ArrayList<String[]>();
-			for (Art product : arts) {
-				String[] line = new String[] { product.type, product.price, product.name, product.description };
+			for (University product : arts) {
+				String[] line = new String[] { product.type, product.tuition, product.name, product.description };
 				allLines.add(line);
 			}
 			writer.writeAll(allLines);
@@ -135,10 +123,10 @@ public class Model {
 
 	public float getCartTotal() {
 		float total = 0;
-		List<Art> cart = retrieveCart();
+		List<University> cart = retrieveCart();
 		if (cart != null) {
-			for (Art product : cart) {
-				total += Float.parseFloat(product.price);
+			for (University product : cart) {
+				total += Float.parseFloat(product.tuition);
 			}
 		}
 		return total;

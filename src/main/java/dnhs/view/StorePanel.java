@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import dnhs.model.Art;
+import dnhs.model.University;
 
 public class StorePanel extends JPanel {
 	private JPanel store;
@@ -26,12 +26,12 @@ public class StorePanel extends JPanel {
 		createFooterPanel();
 	}
 
-	public void viewProducts(List<Art> arts, ActionListener[] buyNowListener) {
+	public void viewProducts(List<University> arts, ActionListener[] buyNowListener) {
 		storeStatus = 1;
 		int count = 0;
 		removeProductsFromDisplay();
-		for (Art product : arts) {
-			ProductPanel newproduct = new ProductPanel(product.type, product.price, product.name, product.description,
+		for (University product : arts) {
+			ProductPanel newproduct = new ProductPanel(product.type, product.tuition, product.name, product.description,
 					buyNowListener[count]);
 			ProductsPanel.add(newproduct.getPanel());
 			count++;
@@ -40,13 +40,13 @@ public class StorePanel extends JPanel {
 		store.add(scrollPane, BorderLayout.CENTER);
 	}
 
-	public void viewCart(List<Art> cart) {
+	public void viewCart(List<University> cart) {
 		storeStatus = 2;
 		removeProductsFromDisplay();
 		if (cart == null)
 			return;
-		for (Art product : cart) {
-			ProductPanel newproduct = new ProductPanel(product.type, product.price, product.name);
+		for (University product : cart) {
+			ProductPanel newproduct = new ProductPanel(product.type, product.tuition, product.name);
 			ProductsPanel.add(newproduct.getPanel());
 		}
 		scrollPane.setViewportView(ProductsPanel);
