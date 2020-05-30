@@ -20,7 +20,7 @@ public class FooterPanel extends JPanel {
 		carttotal = new JLabel("");
 		FooterPanel.add(carttotal);
 
-		btnCheckout = new JButton("Checkout");
+		btnCheckout = new JButton("Clear List");
 		FooterPanel.add(btnCheckout);
 
 		btnCompleteTransaction = new JButton("Complete Order");

@@ -45,9 +45,9 @@ public class NavPanel extends JPanel {
 
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(new Color(255, 203, 164));
-		btnStore = new JButton("Gallery");
+		btnStore = new JButton("Colleges");
 		centerPanel.add(btnStore);
-		btnCheckout = new JButton("My Bag");
+		btnCheckout = new JButton("My List");
 		centerPanel.add(btnCheckout);
 		btnPanel.add(centerPanel, BorderLayout.CENTER);
 		

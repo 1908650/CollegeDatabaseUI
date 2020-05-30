@@ -24,13 +24,13 @@ public class ProductPanel extends JPanel {
 	private String type;
 	private String name;
 	private String description;
-	private float price;
+	private String price;
 
 	private ActionListener BuyNowListener;
 
 	public ProductPanel(String type, String price, String name, String description, ActionListener buyNowListener) {
 		this.type = type;
-		this.price = Float.parseFloat(price);
+		this.price = price;
 		this.name = name;
 		this.description = description;
 		BuyNowListener = buyNowListener;
@@ -40,7 +40,7 @@ public class ProductPanel extends JPanel {
 	public ProductPanel(String type, String price, String name) {
 		this.type = type;
 		this.name = name;
-		this.price = Float.parseFloat(price);
+		this.price = price;
 		createCheckoutComponents();
 	}
 
@@ -113,10 +113,10 @@ public class ProductPanel extends JPanel {
 		tag.add(details);
 
 		JPanel priceInfo = new JPanel(new FlowLayout());
-		priceInfo.add(new JLabel("$" + price));
+		priceInfo.add(new JLabel(price));
 		tag.add(priceInfo);
 
-		JButton buynow = new JButton("Order");
+		JButton buynow = new JButton("Add");
 		buynow.addActionListener(BuyNowListener);
 		tag.add(buynow);
 

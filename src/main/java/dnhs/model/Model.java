@@ -71,20 +71,14 @@ public class Model {
 			List<Art> arts = new ArrayList<Art>();
 			List<String[]> lines = reader.readAll();
 			for (String[] item : lines) {
-				if (item[0].equals("Pencil") && (filter.equals("Pencil") || filter.equals("All"))) {
+				if (item[0].equals("Private") && (filter.equals("Private") || filter.equals("All"))) {
 					arts.add(new Pencil(item[0], item[1], item[2], item[3]));
-				} else if (item[0].equals("Ink") && (filter.equals("Ink") || filter.equals("All"))) {
+				} else if (item[0].equals("Public") && (filter.equals("Public") || filter.equals("All"))) {
 					arts.add(new Ink(item[0], item[1], item[2], item[3]));
-				} else if (item[0].equals("Acrylic") && (filter.equals("Acrylic") || filter.equals("All"))) {
-					arts.add(new Acrylic(item[0], item[1], item[2], item[3]));
-				} else if (item[0].equals("Digital") && (filter.equals("Digital") || filter.equals("All"))) {
-					arts.add(new Digital(item[0], item[1], item[2], item[3]));
-				} else if (item[0].equals("OtherMediums") && (filter.equals("OtherMediums") || filter.equals("All"))) {
-					arts.add(new OtherMediums(item[0], item[1], item[2], item[3]));
 				}
 			}
 			reader.close();
-			Collections.sort(arts);
+			// Collections.sort(arts);
 			return arts;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,16 +92,10 @@ public class Model {
 			List<Art> arts = new ArrayList<Art>();
 			List<String[]> lines = reader.readAll();
 			for (String[] item : lines) {
-				if (item[0].equals("Pencil") && item[3].toLowerCase().contains(searchedKeyWord)) {
+				if (item[0].equals("Private") && item[3].toLowerCase().contains(searchedKeyWord)) {
 					arts.add(new Pencil(item[0], item[1], item[2], item[3]));
-				} else if (item[0].equals("Ink") && item[3].toLowerCase().contains(searchedKeyWord)) {
+				} else if (item[0].equals("Public") && item[3].toLowerCase().contains(searchedKeyWord)) {
 					arts.add(new Ink(item[0], item[1], item[2], item[3]));
-				} else if (item[0].equals("Acrylic") && item[3].toLowerCase().contains(searchedKeyWord)) {
-					arts.add(new Acrylic(item[0], item[1], item[2], item[3]));
-				} else if (item[0].equals("Digital") && item[3].toLowerCase().contains(searchedKeyWord)) {
-					arts.add(new Digital(item[0], item[1], item[2], item[3]));
-				} else if (item[0].equals("OtherMediums") && item[3].toLowerCase().contains(searchedKeyWord)) {
-					arts.add(new OtherMediums(item[0], item[1], item[2], item[3]));
 				}
 			}
 			reader.close();
