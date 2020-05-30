@@ -1,14 +1,14 @@
-University,Public/Private,Tuition,Top Majors
+Public/Private, Tuition, University,Top Majors
 Private,"$51,800",RISD, Graphic Design
 Private,"$47,730",Harvard,Engineering
-MIT,Private,"$55,450",Bioengineering
-UCSD,Public,"$32,838",Computer Science
-Massachusetts Institute of Technology (MIT),Private,"$55,450",Chemical Engineering
-Cal Poly Slo,Public,"$21,303",Landscape Architecture
-UC Berkeley,Public,"$39,550",Data Science
-UCSD,Public,"$32,838",Cognitive Science
-Minerva Schools at KGI,Private,"$14,800",Business
-UCLA,Public,"$32,640",Economics
-USC,Private,"$52,217",Economics
-Purdue University,Public,"$28,794",Cybersecurity
-UCLA,Public,"$32,640",Civil Engineering
+Private,"$55,450", MIT, Bioengineering
+Public,"$32,838", UCSD, Computer Science
+Private,"$55,450", Massachusetts Institute of Technology (MIT),Chemical Engineering
+Public,"$21,303",Cal Poly Slo,Landscape Architecture
+Public,"$39,550",UC Berkeley,Data Science
+Public,"$32,838",UCSD,Cognitive Science
+Private,"$14,800", Minerva Schools at KGI,Private,Business
+Public,"$32,640",UCLA,Economics
+Private,"$52,217",USC,Economics
+Public,"$28,794",Purdue University,Cybersecurity
+Public,"$32,640",UCLA,Civil Engineering
