@@ -32,7 +32,7 @@ public class NavPanel extends JPanel {
 
 		JPanel btnPanel = new JPanel(new BorderLayout());
 		btnPanel.setBackground(new Color(255, 203, 164));
-		String[] artType = { "All", "Pencil", "Ink", "Digital", "Acrylic", "OtherMediums" };
+		String[] artType = { "All", "Private", "Public" };
 
 		JPanel westPanel = new JPanel();
 		westPanel.setBackground(new Color(255, 203, 164));

@@ -1,28 +1,11 @@
-Public/Private, Tuition, University,Top Majors
-Private,"$51,800",RISD, Graphic Design
+Public/Private,Tuition,University,Top Majors
+Private,"$51,800",RISD,Graphic Design
 Private,"$47,730",Harvard,Engineering
-<<<<<<< HEAD
-Private,"$55,450", MIT, Bioengineering
-Public,"$32,838", UCSD, Computer Science
-Private,"$55,450", Massachusetts Institute of Technology (MIT),Chemical Engineering
-Public,"$21,303",Cal Poly Slo,Landscape Architecture
-Public,"$39,550",UC Berkeley,Data Science
-Public,"$32,838",UCSD,Cognitive Science
-Private,"$14,800", Minerva Schools at KGI,Private,Business
-Public,"$32,640",UCLA,Economics
-Private,"$52,217",USC,Economics
-Public,"$28,794",Purdue University,Cybersecurity
-Public,"$32,640",UCLA,Civil Engineering
-=======
+Public,"$28,794",Purdue,Cybersecurity
 Private,"$55,450",MIT,Bioengineering
 Public,"$32,838",UCSanDiego,Computer Science
-Private,"$55,450",MIT,Chemical Engineering
-Cal Poly Slo,Public,"$21,303",Landscape Architecture
+Public,"$21,303",Cal Poly SLO,Landscape Architecture
 Public,"$39,550",UCBerkeley,Data Science
-Public,"$32,838",UCSanDiego,Cognitive Science
 Private,"$14,800",Minerva,Business
 Public,"$32,640",UCLosAngeles,Economics
 Private,"$52,217",USC,Economics
-Purdue University,Public,"$28,794",Cybersecurity
-UCLA,Public,"$32,640",Civil Engineering
->>>>>>> branch 'master' of https://github.com/1908650/CollegeDatabaseUI.git
