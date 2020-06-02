@@ -27,16 +27,30 @@ public class Model {
 	public String filter = "All";
 	public String searchedKeyWord = "";
 
-	public Model() {
+	public List<String[]> readAll() {
 		try {
-			String student = this.getStudentInfo("Sydney Hsieh");
-			System.out.println(student);
+			List<String[]> allStudents = new ArrayList<String[]>();
+			allStudents.add(this.getStudentInfo("Sydney Hsieh"));
+			allStudents.add(this.getStudentInfo("Ellie Feng"));
+			allStudents.add(this.getStudentInfo("Phoenix Dimagiba"));
+			allStudents.add(this.getStudentInfo("Janice Kim"));
+			allStudents.add(this.getStudentInfo("Darby Godman"));
+			allStudents.add(this.getStudentInfo("Mansi Basmatkar"));
+			allStudents.add(this.getStudentInfo("Catherine Gu"));
+			allStudents.add(this.getStudentInfo("Esther Tian"));
+			allStudents.add(this.getStudentInfo("Skyler Wu"));
+			allStudents.add(this.getStudentInfo("Mithil Pujar"));
+			System.out.println(allStudents);
+			
+			return allStudents;
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		return null;
 	}
 
-	public String getStudentInfo(String studentName) throws Exception {
+	public String[] getStudentInfo(String studentName) throws Exception {
 		ProfileCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
 		try {
 			credentialsProvider.getCredentials();
@@ -58,7 +72,7 @@ public class Model {
 		ItemCollection<QueryOutcome> items = null;
 		Iterator<Item> iterator = null;
 		Item item = null;
-		String studentInfo = "";
+		String[] studentInfo = new String[4];
 
 		try {
 			System.out.println("Student info:");
@@ -67,18 +81,26 @@ public class Model {
 
 			while (iterator.hasNext()) {
 				item = iterator.next();
-				studentInfo = item.getString("Student") + "\n" + item.getString("College") + "\n"
-						+ item.getString("Major");
+
+				String type = item.getString("Type");
+				String tuition = item.getString("Tuition");
+				String college = item.getString("College");
+				String description = "Alumni: " + item.getString("Student") + " Top Majors: " + item.getString("Major") + " Acceptance Rate: " + item.getDouble("Acceptance %");
+				studentInfo[0] = type;
+				studentInfo[1] = tuition;
+				studentInfo[2] = college;
+				studentInfo[3] = description;
+				System.out.print(studentInfo);
 			}
-			if (studentInfo.equals("")) {
-				studentInfo = "Unable to find this student. Please check your spelling or verify that this is a Del Norte Senior.";
+			if (studentInfo.equals(null)) {
+				studentInfo[0] = "Unable to find this student. Please check your spelling or verify that this is a Del Norte Senior.";
 
 			}
 
 		}
 
 		catch (Exception e) {
-			studentInfo = "Unable to find this student";
+			studentInfo[0] = "Unable to find this student";
 			System.err.println(e.getMessage());
 		}
 
@@ -100,9 +122,8 @@ public class Model {
 
 	public List<University> retrieveCart() {
 		try {
-			CSVReader reader = new CSVReader(new FileReader(BAG_LOCATION));
 			List<University> arts = new ArrayList<University>();
-			List<String[]> lines = reader.readAll();
+			List<String[]> lines = this.readAll();
 			for (String[] item : lines) {
 				if (item[0].equals("Private")) {
 					arts.add(new Private(item[0], item[1], item[2]));
@@ -110,10 +131,8 @@ public class Model {
 					arts.add(new Public(item[0], item[1], item[2]));
 				}
 			}
-			reader.close();
+			
 			return arts;
-		} catch (IOException e) {
-			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -123,17 +142,18 @@ public class Model {
 
 	public List<University> retrieveProducts() {
 		try {
-			CSVReader reader = new CSVReader(new FileReader(PRODUCT_LOCATION));
 			List<University> arts = new ArrayList<University>();
-			List<String[]> lines = reader.readAll();
+			List<String[]> lines = this.readAll();
 			for (String[] item : lines) {
+				if (item[0] == null)
+					continue;
 				if (item[0].equals("Private") && (filter.equals("Private") || filter.equals("All"))) {
 					arts.add(new Private(item[0], item[1], item[2], item[3]));
 				} else if (item[0].equals("Public") && (filter.equals("Public") || filter.equals("All"))) {
 					arts.add(new Public(item[0], item[1], item[2], item[3]));
 				}
 			}
-			reader.close();
+			
 			// Collections.sort(arts);
 			return arts;
 		} catch (Exception e) {
@@ -144,9 +164,8 @@ public class Model {
 
 	public List<University> retrieveSearch() {
 		try {
-			CSVReader reader = new CSVReader(new FileReader(PRODUCT_LOCATION));
 			List<University> arts = new ArrayList<University>();
-			List<String[]> lines = reader.readAll();
+			List<String[]> lines = this.readAll();
 			for (String[] item : lines) {
 				if (item[0].equals("Private") && item[3].toLowerCase().contains(searchedKeyWord)) {
 					arts.add(new Private(item[0], item[1], item[2], item[3]));
@@ -154,7 +173,7 @@ public class Model {
 					arts.add(new Public(item[0], item[1], item[2], item[3]));
 				}
 			}
-			reader.close();
+			
 
 			return arts;
 		} catch (Exception e) {
