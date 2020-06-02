@@ -56,9 +56,11 @@ public class NavPanel extends JPanel {
 		
 		JPanel searchPanel = new JPanel();
 		searchPanel.setBackground(new Color (255, 203, 164));
-		JLabel searchlabel = new JLabel("Search:");
+		JLabel searchlabel = new JLabel("Search For Student (Enter Full Name):");
 		searchPanel.add(searchlabel);
 		searchBar = new JTextField();
+		searchBar.setToolTipText("");
+		searchBar.setDisabledTextColor(Color.GRAY);
 		searchBar.setBounds(16, 5, 466, 55);
 		searchBar.setPreferredSize(new Dimension(200,25));
 		searchPanel.add(searchBar);
