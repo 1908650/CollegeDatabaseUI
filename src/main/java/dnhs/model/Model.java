@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import java.util.Iterator;
@@ -20,6 +22,9 @@ import com.amazonaws.services.dynamodbv2.document.ItemCollection;
 import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ScanRequest;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
 
 public class Model {
 	private String BAG_LOCATION = "cart.csv";
@@ -30,16 +35,11 @@ public class Model {
 	public List<String[]> readAll() {
 		try {
 			List<String[]> allStudents = new ArrayList<String[]>();
-			allStudents.add(this.getStudentInfo("Sydney Hsieh"));
-			allStudents.add(this.getStudentInfo("Ellie Feng"));
-			allStudents.add(this.getStudentInfo("Phoenix Dimagiba"));
-			allStudents.add(this.getStudentInfo("Janice Kim"));
-			allStudents.add(this.getStudentInfo("Darby Godman"));
-			allStudents.add(this.getStudentInfo("Mansi Basmatkar"));
-			allStudents.add(this.getStudentInfo("Catherine Gu"));
-			allStudents.add(this.getStudentInfo("Esther Tian"));
-			allStudents.add(this.getStudentInfo("Skyler Wu"));
-			allStudents.add(this.getStudentInfo("Mithil Pujar"));
+			ArrayList<String> studentNames = getAllStudents(); 
+			for(int i = 0; i<studentNames.size(); i++)
+			{
+			allStudents.add(getStudentInfo(studentNames.get(i)));
+			}
 			System.out.println(allStudents);
 			
 			return allStudents;
@@ -217,6 +217,41 @@ public class Model {
 			}
 		}
 		return total;
+	}
+	
+	public ArrayList<String> getAllStudents()
+	{
+		
+		ArrayList<String>Students = new ArrayList<String>();
+		ProfileCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
+	    try {
+	      credentialsProvider.getCredentials();
+	    } catch (Exception e) {
+	      throw new AmazonClientException(
+	          "Cannot load the credentials from the credential profiles file. " +
+	          "Please make sure that your credentials file is at the correct " +
+	          "location (/Users/johnmortensen/.aws/credentials), and is in valid format.",
+	          e);
+	    }
+	    AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+	    	.withCredentials(credentialsProvider)
+	      .withRegion("us-west-2")
+	      .build();
+	    DynamoDB dynamoDB = new DynamoDB(client);
+	   // Table table = dynamoDB.getTable("Student");
+	ScanRequest scanRequest = new ScanRequest()
+	    .withTableName("DNSeniors");
+	ScanResult result = client.scan(scanRequest);
+	
+	for (Map<String, AttributeValue> item : result.getItems()){
+		// add specification: getStudentName()
+		// print the Student name only-- when clicked, goes to page with ALL of student's info
+			String itemString = item.get("Student").toString();
+			Students.add(itemString.substring(itemString.indexOf(" ")+1, itemString.length()-2));;
+
+	}
+	
+	return Students; 
 	}
 
 }
