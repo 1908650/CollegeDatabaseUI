@@ -110,7 +110,7 @@ public class Controller {
 		FooterPanel.addCheckoutBtn();
 		view.viewRefresh();
 	}
-
+//
 	public void displayStore() {
 		FooterPanel.setTotalText(model.getCartTotal());
 		store.getPanel().add(store);
