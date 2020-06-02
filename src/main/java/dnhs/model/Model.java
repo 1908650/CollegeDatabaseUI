@@ -39,7 +39,6 @@ public class Model {
 			for (int i = 0; i < studentNames.size(); i++) {
 				allStudents.add(getStudentInfo(studentNames.get(i)));
 			}
-			System.out.println(allStudents);
 
 			return allStudents;
 
@@ -74,7 +73,6 @@ public class Model {
 		String[] studentInfo = new String[4];
 
 		try {
-			System.out.println("Student info:");
 			items = table.query(querySpec);
 			iterator = items.iterator();
 
@@ -90,7 +88,6 @@ public class Model {
 				studentInfo[1] = tuition;
 				studentInfo[2] = college;
 				studentInfo[3] = description;
-				System.out.print(studentInfo);
 			}
 			if (studentInfo.equals(null)) {
 				studentInfo[0] = "Unable to find this student. Please check your spelling or verify that this is a Del Norte Senior.";
