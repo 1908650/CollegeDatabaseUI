@@ -22,11 +22,11 @@ public class Controller {
 		this.view = view;
 
 		store = new StorePanel();
-		store.getNav().addFilterListener(new ActionListener() {
-			public void actionPerformed(ActionEvent a) {
-				getFilter(a);
-			}
-		});
+//		store.getNav().addFilterListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent a) {
+//				getFilter(a);
+//			}
+//		});
 		store.getNav().addSearchListener(new ActionListener() {
 			public void actionPerformed(ActionEvent a) {
 				displaySearch();

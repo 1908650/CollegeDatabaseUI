@@ -43,7 +43,7 @@ public class NavPanel extends JPanel {
 		westPanel.add(sort);
 		//artFilter = new JComboBox<String>(artType);
 		//artFilter.setSelectedIndex(0);
-		westPanel.add(artFilter);
+		//westPanel.add(artFilter);
 		btnPanel.add(westPanel, BorderLayout.EAST);
 
 		JPanel centerPanel = new JPanel();
