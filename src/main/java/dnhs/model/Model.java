@@ -35,15 +35,14 @@ public class Model {
 	public List<String[]> readAll() {
 		try {
 			List<String[]> allStudents = new ArrayList<String[]>();
-			ArrayList<String> studentNames = getAllStudents(); 
-			for(int i = 0; i<studentNames.size(); i++)
-			{
-			allStudents.add(getStudentInfo(studentNames.get(i)));
+			ArrayList<String> studentNames = getAllStudents();
+			for (int i = 0; i < studentNames.size(); i++) {
+				allStudents.add(getStudentInfo(studentNames.get(i)));
 			}
 			System.out.println(allStudents);
-			
+
 			return allStudents;
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -85,7 +84,8 @@ public class Model {
 				String type = item.getString("Type");
 				String tuition = item.getString("Tuition");
 				String college = item.getString("College");
-				String description = "Alumni: " + item.getString("Student") + " Top Majors: " + item.getString("Major") + " Acceptance Rate: " + item.getDouble("Acceptance %");
+				String description = "Alumni: " + item.getString("Student") + " Top Majors: " + item.getString("Major")
+						+ " Acceptance Rate: " + item.getDouble("Acceptance %");
 				studentInfo[0] = type;
 				studentInfo[1] = tuition;
 				studentInfo[2] = college;
@@ -131,7 +131,7 @@ public class Model {
 					arts.add(new Public(item[0], item[1], item[2]));
 				}
 			}
-			
+
 			return arts;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,7 +153,7 @@ public class Model {
 					arts.add(new Public(item[0], item[1], item[2], item[3]));
 				}
 			}
-			
+
 			// Collections.sort(arts);
 			return arts;
 		} catch (Exception e) {
@@ -173,7 +173,6 @@ public class Model {
 					arts.add(new Public(item[0], item[1], item[2], item[3]));
 				}
 			}
-			
 
 			return arts;
 		} catch (Exception e) {
@@ -218,40 +217,37 @@ public class Model {
 		}
 		return total;
 	}
-	
-	public ArrayList<String> getAllStudents()
-	{
-		
-		ArrayList<String>Students = new ArrayList<String>();
-		ProfileCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
-	    try {
-	      credentialsProvider.getCredentials();
-	    } catch (Exception e) {
-	      throw new AmazonClientException(
-	          "Cannot load the credentials from the credential profiles file. " +
-	          "Please make sure that your credentials file is at the correct " +
-	          "location (/Users/johnmortensen/.aws/credentials), and is in valid format.",
-	          e);
-	    }
-	    AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-	    	.withCredentials(credentialsProvider)
-	      .withRegion("us-west-2")
-	      .build();
-	    DynamoDB dynamoDB = new DynamoDB(client);
-	   // Table table = dynamoDB.getTable("Student");
-	ScanRequest scanRequest = new ScanRequest()
-	    .withTableName("DNSeniors");
-	ScanResult result = client.scan(scanRequest);
-	
-	for (Map<String, AttributeValue> item : result.getItems()){
-		// add specification: getStudentName()
-		// print the Student name only-- when clicked, goes to page with ALL of student's info
-			String itemString = item.get("Student").toString();
-			Students.add(itemString.substring(itemString.indexOf(" ")+1, itemString.length()-2));;
 
-	}
-	
-	return Students; 
+	public ArrayList<String> getAllStudents() {
+
+		ArrayList<String> Students = new ArrayList<String>();
+		ProfileCredentialsProvider credentialsProvider = new ProfileCredentialsProvider();
+		try {
+			credentialsProvider.getCredentials();
+		} catch (Exception e) {
+			throw new AmazonClientException("Cannot load the credentials from the credential profiles file. "
+					+ "Please make sure that your credentials file is at the correct "
+					+ "location (/Users/johnmortensen/.aws/credentials), and is in valid format.", e);
+		}
+		AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().withCredentials(credentialsProvider)
+				.withRegion("us-west-2").build();
+		DynamoDB dynamoDB = new DynamoDB(client);
+		// Table table = dynamoDB.getTable("Student");
+		ScanRequest scanRequest = new ScanRequest().withTableName("DNSeniors");
+		ScanResult result = client.scan(scanRequest);
+
+		for (Map<String, AttributeValue> item : result.getItems()) {
+			// add specification: getStudentName()
+			// print the Student name only-- when clicked, goes to page with ALL of
+			// student's info
+			String itemString = item.get("Student").toString();
+			Students.add(itemString.substring(itemString.indexOf(" ") + 1, itemString.length() - 2));
+			;
+
+		}
+
+		return Students;
+
 	}
 
 }
