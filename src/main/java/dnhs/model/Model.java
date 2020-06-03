@@ -82,8 +82,8 @@ public class Model {
 				String type = item.getString("Type");
 				String tuition = item.getString("Tuition");
 				String college = item.getString("College");
-				String description = "Alumni: " + item.getString("Student") + " Top Majors: " + item.getString("Major")
-						+ " Acceptance Rate: " + item.getDouble("Acceptance %");
+				String description = "Alumni: " + item.getString("Student") + "\nMajor(s): " + item.getString("Major") + "\n Acceptance Rate: " + item.getDouble("Acceptance %")+ "\n University Tuition: "+item.getInt("Tuition") + 
+						"\n Student Email: "+ item.getString(("Email")) + "\n University Type: " + item.getString("Type");
 				studentInfo[0] = type;
 				studentInfo[1] = tuition;
 				studentInfo[2] = college;
