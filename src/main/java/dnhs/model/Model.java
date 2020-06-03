@@ -91,7 +91,7 @@ public class Model {
 			}
 			if (studentInfo.equals(null)) {
 				studentInfo[0] = "Unable to find this student. Please check your spelling or verify that this is a Del Norte Senior.";
-
+// for commit
 			}
 
 		}
